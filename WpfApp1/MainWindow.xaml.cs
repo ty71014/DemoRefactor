@@ -97,18 +97,9 @@ namespace WpfApp1
             //IP01
             if (ReadStrat01.Text == string.Empty && plc1.Connected == true)
             {
-
-                textBox01.Text = "";
-                textBox02.Text = "";
-                textBox03.Text = "";
-                textBox04.Text = "";
-                textBox05.Text = "";
-                textBox06.Text = "";
-                textBox07.Text = "";
-                textBox08.Text = "";
+                ClearTextBox1To8();
 
                 StateReadSTR01.Text = "IP01缺少起始: " + DateTime.Now.ToString();
-
             }
             else if (ReadStrat01.Text != string.Empty && plc1.Connected == true)
             {
@@ -139,14 +130,7 @@ namespace WpfApp1
                 {
 
                     StateReadSTR01.Text = "IP01起始位置內容格式不對或不正常通訊: " + DateTime.Now.ToString();
-                    textBox01.Text = "";
-                    textBox02.Text = "";
-                    textBox03.Text = "";
-                    textBox04.Text = "";
-                    textBox05.Text = "";
-                    textBox06.Text = "";
-                    textBox07.Text = "";
-                    textBox08.Text = "";
+                    ClearTextBox1To8();
                 }
                 
             }
@@ -155,18 +139,9 @@ namespace WpfApp1
             //IP02
             if (ReadStrat02.Text == string.Empty && plc2.Connected==true)
             {
-                
-                textBox11.Text = "";
-                textBox12.Text = "";
-                textBox13.Text = "";
-                textBox14.Text = "";
-                textBox15.Text = "";
-                textBox16.Text = "";
-                textBox17.Text = "";
-                textBox18.Text = "";
+                ClearTextBox11To18();
 
                 StateReadSTR02.Text = "IP01缺少起始: " + DateTime.Now.ToString();
-
             }
             else if (ReadStrat02.Text != string.Empty && plc2.Connected == true)
             {
@@ -197,19 +172,37 @@ namespace WpfApp1
                 {
 
                     StateReadSTR02.Text = "IP02起始位置內容格式不對或不正常通訊: " + DateTime.Now.ToString();
-                    textBox11.Text = "";
-                    textBox12.Text = "";
-                    textBox13.Text = "";
-                    textBox14.Text = "";
-                    textBox15.Text = "";
-                    textBox16.Text = "";
-                    textBox17.Text = "";
-                    textBox18.Text = "";
+                    ClearTextBox11To18();
                 }
 
             }
 
         }
+
+        private void ClearTextBox11To18()
+        {
+            textBox11.Text = "";
+            textBox12.Text = "";
+            textBox13.Text = "";
+            textBox14.Text = "";
+            textBox15.Text = "";
+            textBox16.Text = "";
+            textBox17.Text = "";
+            textBox18.Text = "";
+        }
+
+        private void ClearTextBox1To8()
+        {
+            textBox01.Text = "";
+            textBox02.Text = "";
+            textBox03.Text = "";
+            textBox04.Text = "";
+            textBox05.Text = "";
+            textBox06.Text = "";
+            textBox07.Text = "";
+            textBox08.Text = "";
+        }
+
         //手動連線
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
