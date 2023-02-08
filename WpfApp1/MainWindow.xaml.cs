@@ -15,12 +15,12 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Timer DefiniteTime = new Timer();
+        private readonly Timer DefiniteTimeTimer = new Timer();
         private readonly ModbusClient plc1 = new ModbusClient();
         private readonly ModbusClient plc2 = new ModbusClient("192.168.50.11", 502);
 
         private readonly DispatcherTimer SynctTme001 = new DispatcherTimer();
-        private readonly Timer TimerLocal = new Timer();
+        private readonly Timer UpdateTimeTimer = new Timer();
 
         private int W01, W02;
 
@@ -30,7 +30,23 @@ namespace WpfApp1
             InitTimers();
             Loaded += MainWindow_Loaded;
         }
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            connected();
+        }
+        //一直執行的時間
+        private void InitTimers()
+        {
+            UpdateTimeTimer.Enabled = true;
+            UpdateTimeTimer.Interval = 500;
+            UpdateTimeTimer.Elapsed += OnUpdateTimeTimerElapsed;
+            UpdateTimeTimer.Start();
 
+            DefiniteTimeTimer.Enabled = true;
+            DefiniteTimeTimer.Interval = 20000;
+            DefiniteTimeTimer.Elapsed += OnDefiniteTimeElapsed;
+            DefiniteTimeTimer.Start();
+        }
 
         //通訊條件
         private void connected()
@@ -54,7 +70,7 @@ namespace WpfApp1
 
                         W01 = 0;
                         StateReadW01.Text = W01.ToString();
-                        sync01();
+                        WriteToPLC1();
                     }
                 }
                 catch (Exception)
@@ -83,7 +99,7 @@ namespace WpfApp1
 
                         W02 = 0;
                         StateReadW02.Text = W02.ToString();
-                        sync02();
+                        WriteToPLC2();
                     }
                 }
                 catch (Exception)
@@ -111,7 +127,7 @@ namespace WpfApp1
         }
 
         //同步
-        private void sync01()
+        private void WriteToPLC1()
         {
             if (plc1.Connected)
             {
@@ -123,7 +139,7 @@ namespace WpfApp1
         }
 
         //同步
-        public void sync02()
+        private void WriteToPLC2()
         {
             if (plc2.Connected)
             {
@@ -134,28 +150,16 @@ namespace WpfApp1
             }
         }
 
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            connected();
-        }
 
 
-        //一直執行的時間
-        private void InitTimers()
-        {
-            TimerLocal.Enabled = true;
-            TimerLocal.Interval = 500;
-            TimerLocal.Start();
-            TimerLocal.Elapsed += timerLocal;
+       
 
-            DefiniteTime.Enabled = true;
-            DefiniteTime.Interval = 20000;
-            DefiniteTime.Start();
-            DefiniteTime.Elapsed += definiteTime;
-        }
-
-        //本地時間
-        private void timerLocal(object sender, ElapsedEventArgs e)
+        /// <summary>
+        /// 更新UI本地時間
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnUpdateTimeTimerElapsed(object sender, ElapsedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -292,8 +296,8 @@ namespace WpfApp1
         //手動同步
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            sync01();
-            sync02();
+            WriteToPLC1();
+            WriteToPLC2();
         }
 
         //斷訊條件
@@ -324,17 +328,17 @@ namespace WpfApp1
 
 
         //呼叫定時
-        private void definiteTime(object sender, ElapsedEventArgs e)
+        private void OnDefiniteTimeElapsed(object sender, ElapsedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
                 if ((textBoxForHr01.Text == DateTime.Now.Hour.ToString() &&
-                    textBoxForMin01.Text == DateTime.Now.Minute.ToString())  || 
+                     textBoxForMin01.Text == DateTime.Now.Minute.ToString()) ||
                     (textBoxForHr02.Text == DateTime.Now.Hour.ToString() &&
-                    textBoxForMin02.Text == DateTime.Now.Minute.ToString()))
+                     textBoxForMin02.Text == DateTime.Now.Minute.ToString()))
                 {
-                    sync01();
-                    sync02();
+                    WriteToPLC1();
+                    WriteToPLC2();
                 }
             }));
         }
