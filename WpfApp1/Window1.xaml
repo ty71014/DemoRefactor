@@ -1,0 +1,65 @@
+﻿<Window x:Class="WpfApp1.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Window1" Height="450" Width="800">
+    <Grid>
+        <ListBox Margin="201,60,0,0" x:Name="ListTimeSelect01" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" Height="24">
+            <ListBoxItem Content="00:30"/>
+            <ListBoxItem Content="01:00"/>
+            <ListBoxItem Content="01:30"/>
+            <ListBoxItem Content="02:00"/>
+            <ListBoxItem Content="02:30"/>
+            <ListBoxItem Content="03:00"/>
+            <ListBoxItem Content="03:30"/>
+            <ListBoxItem Content="04:00"/>
+            <ListBoxItem Content="04:30"/>
+            <ListBoxItem Content="05:00"/>
+            <ListBoxItem Content="05:30"/>
+            <ListBoxItem Content="06:00"/>
+            <ListBoxItem Content="06:30"/>
+            <ListBoxItem Content="07:00"/>
+            <ListBoxItem Content="07:30"/>
+            <ListBoxItem Content="08:00"/>
+            <ListBoxItem Content="08:30"/>
+            <ListBoxItem Content="09:00"/>
+            <ListBoxItem Content="09:30"/>
+            <ListBoxItem Content="10:00"/>
+            <ListBoxItem Content="10:30"/>
+            <ListBoxItem Content="11:00"/>
+            <ListBoxItem Content="11:30"/>
+            <ListBoxItem Content="12:00"/>
+            <ListBoxItem Content="12:30"/>
+            <ListBoxItem Content="13:00"/>
+            <ListBoxItem Content="13:30"/>
+            <ListBoxItem Content="14:00"/>
+            <ListBoxItem Content="14:30"/>
+            <ListBoxItem Content="15:00"/>
+            <ListBoxItem Content="15:30"/>
+            <ListBoxItem Content="16:00"/>
+            <ListBoxItem Content="16:30"/>
+            <ListBoxItem Content="17:00"/>
+            <ListBoxItem Content="17:30"/>
+            <ListBoxItem Content="18:00"/>
+            <ListBoxItem Content="18:30"/>
+            <ListBoxItem Content="19:00"/>
+            <ListBoxItem Content="19:30"/>
+            <ListBoxItem Content="20:00"/>
+            <ListBoxItem Content="20:30"/>
+            <ListBoxItem Content="21:00"/>
+            <ListBoxItem Content="21:30"/>
+            <ListBoxItem Content="22:00"/>
+            <ListBoxItem Content="22:30"/>
+            <ListBoxItem Content="23:00"/>
+            <ListBoxItem Content="23:30"/>
+            <ListBoxItem Content="00:00"/>
+        </ListBox>
+        <TextBox x:Name="textTimebox" HorizontalAlignment="Left" Height="23" Margin="69,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110"/>
+        <Button x:Name="AddTimeBtn" Content="加入同步時間" HorizontalAlignment="Left" Margin="201,24,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_3"/>
+        <ListBox x:Name="ListTimeSelect02" HorizontalAlignment="Left" Height="28" Margin="69,60,0,0" VerticalAlignment="Top" Width="110"/>
+
+    </Grid>
+</Window>
