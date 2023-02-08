@@ -17,12 +17,11 @@ namespace WpfApp1
     {
         private readonly Timer DefiniteTimeTimer = new Timer();
         private readonly ModbusClient plc1 = new ModbusClient();
-        private readonly ModbusClient plc2 = new ModbusClient("192.168.50.11", 502);
+        private readonly ModbusClient plc2 = new ModbusClient();
 
         private readonly DispatcherTimer ReadFromPLCTimer = new DispatcherTimer();
         private readonly Timer UpdateTimeTimer = new Timer();
-
-        private int W01, W02;
+        
 
         public MainWindow()
         {
@@ -30,11 +29,12 @@ namespace WpfApp1
             InitTimers();
             Loaded += MainWindow_Loaded;
         }
+
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             connected();
         }
-        //一直執行的時間
+
         private void InitTimers()
         {
             UpdateTimeTimer.Enabled = true;
@@ -48,9 +48,11 @@ namespace WpfApp1
             DefiniteTimeTimer.Start();
 
             ReadFromPLCTimer.Interval = TimeSpan.FromSeconds(0.5);
+            ReadFromPLCTimer.Tick += ReadFromPLCTimer_Tick;
             ReadFromPLCTimer.Start();
-            ReadFromPLCTimer.Tick += ReadFromPLCTimer_Tick; ;
         }
+
+        //一直執行的時間
 
         private void ReadFromPLCTimer_Tick(object sender, EventArgs e)
         {
@@ -146,18 +148,12 @@ namespace WpfApp1
 
                     if (plc1.Connected)
                     {
-
-                        W01 = 0;
-                        StateReadW01.Text = W01.ToString();
                         WriteToPLC1();
                     }
                 }
                 catch (Exception)
                 {
                     Disconnected(1);
-
-                    W01 = -1;
-                    StateReadW01.Text = W01.ToString();
                 }
 
             //PLC02
@@ -171,16 +167,12 @@ namespace WpfApp1
                     plc2.Available(3000);
                     if (plc2.Connected)
                     {
-                        W02 = 0;
-                        StateReadW02.Text = W02.ToString();
                         WriteToPLC2();
                     }
                 }
                 catch (Exception)
                 {
                     Disconnected(2);
-                    W02 = -1;
-                    StateReadW02.Text = W02.ToString();
                 }
         }
 
