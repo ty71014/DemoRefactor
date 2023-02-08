@@ -28,11 +28,14 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            CycTime();
-             connected();
+            InitTimers();
+            Loaded += MainWindow_Loaded;
         }
 
-        
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            connected();
+        }
 
         int W01, W02;
         ModbusClient plc1 = new ModbusClient();
@@ -49,7 +52,7 @@ namespace WpfApp1
 
         
         //一直執行的時間
-        private void CycTime()
+        private void InitTimers()
         {
             TimerLocal.Enabled = true;
             TimerLocal.Interval = 500;
