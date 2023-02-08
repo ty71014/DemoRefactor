@@ -33,7 +33,7 @@ namespace WpfApp1
 
 
         //通訊條件
-        public void connected()
+        private void connected()
         {
             if (plc2.Connected == false)
                 //PLC01
@@ -95,7 +95,7 @@ namespace WpfApp1
         }
 
         //現在時間
-        public int[] GetCurrentTimeArray()
+        private int[] GetCurrentTimeArray()
         {
             var timeArray = new int[8];
             var currentTime = DateTime.Now;
@@ -111,7 +111,7 @@ namespace WpfApp1
         }
 
         //同步
-        public void sync01()
+        private void sync01()
         {
             if (plc1.Connected)
             {
@@ -131,22 +131,6 @@ namespace WpfApp1
                 Thread.Sleep(200);
                 LOCALTIME01.Text = "暫停: " + DateTime.Now + ":" + DateTime.Now.Millisecond;
                 plc2.WriteSingleRegister(500, 0);
-            }
-        }
-
-        public void Timesyn01()
-        {
-            if (textBoxForHr01.Text == DateTime.Now.Hour.ToString() &&
-                textBoxForMin01.Text == DateTime.Now.Minute.ToString())
-            {
-                sync01();
-                sync02();
-            }
-            else if (textBoxForHr02.Text == DateTime.Now.Hour.ToString() &&
-                     textBoxForMin02.Text == DateTime.Now.Minute.ToString())
-            {
-                sync01();
-                sync02();
             }
         }
 
