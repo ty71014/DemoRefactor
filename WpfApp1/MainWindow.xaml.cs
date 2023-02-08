@@ -342,7 +342,17 @@ namespace WpfApp1
         //呼叫定時
         private void definiteTime(object sender, ElapsedEventArgs e)
         {
-            Dispatcher.BeginInvoke(new Action(() => { Timesyn01(); }));
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                if ((textBoxForHr01.Text == DateTime.Now.Hour.ToString() &&
+                    textBoxForMin01.Text == DateTime.Now.Minute.ToString())  || 
+                    (textBoxForHr02.Text == DateTime.Now.Hour.ToString() &&
+                    textBoxForMin02.Text == DateTime.Now.Minute.ToString()))
+                {
+                    sync01();
+                    sync02();
+                }
+            }));
         }
 
         private void textBox0_TextChanged(object sender, TextChangedEventArgs e)
