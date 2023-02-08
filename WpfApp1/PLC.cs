@@ -12,7 +12,7 @@ namespace WpfApp1
 
         //public void sync02()
         //{
-        //    LocalTime();
+        //    GetCurrentTimeArray();
         //    for (int i = 0; i < 8; i++)
         //    {
         //        btBox03[i] = int.TryParse(btBox01[i], out btBox02[i]);
